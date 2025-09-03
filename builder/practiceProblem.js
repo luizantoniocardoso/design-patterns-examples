@@ -20,9 +20,70 @@ class Car {
   }
 }
 
-// Cliente precisa lembrar a ordem e todos os parâmetros
-const car1 = new Car("Toyota", "Corolla", 2024, "2.0", "Preto", true);
-const car2 = new Car("Honda", "Civic", 2023, "1.5 Turbo", "Prata", false);
+class CarBuilder {
+  constructor() {
+    this.brand = null;
+    this.model = null;
+    this.year = null;
+    this.engine = null;
+    this.color = null;
+    this.gps = false;
+  }
 
-car1.showDetails();
-car2.showDetails();
+  setBrand(brand) {
+    this.brand = brand;
+    return this;
+  }
+
+  setModel(model) {
+    this.model = model;
+    return this;
+  }
+
+  setYear(year) {
+    this.year = year;
+    return this;
+  }
+
+  setEngine(engine) {
+    this.engine = engine;
+    return this;
+  }
+
+  setColor(color) {
+    this.color = color;
+    return this;
+  }
+
+  setGps(gps) {
+    this.gps = gps;
+    return this;
+  }
+
+  build() {
+    if (!this.brand || !this.model || !this.year) {
+      throw new Error("Marca, modelo e ano são obrigatórios.");
+    }
+
+    return new Car(
+      this.brand,
+      this.model,
+      this.year,
+      this.engine,
+      this.color,
+      this.gps
+    );
+  }
+}
+
+
+const carro = new CarBuilder()
+.setBrand('Pegeout')
+.setModel('207')
+.setYear(2012)
+.setEngine('1.4')
+.setColor('Branco')
+.setGps(false)
+.build();
+carro.showDetails();
+  
